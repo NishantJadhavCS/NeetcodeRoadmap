@@ -2,46 +2,62 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_map>
+#include <map>
+#include <unordered_set>
 
 using namespace std;
 
 bool isValidSudoku(vector<vector<char>> &board)
 {
-    unordered_map<char, int> row, col;
+    vector<vector<vector<char>>> block(3, vector<vector<char>>(3));
+    unordered_map<char, int> row, col, box;
     for (int i = 0; i < 9; i++)
     {
         for (int j = 0; j < 9; j++)
         {
-            char c = board[i][j];
-            if (c == '.')
+            char r = board[i][j];
+            char c = board[j][i];
+            int blockRow = i / 3;
+            int blockCol = j / 3;
+            block[blockRow][blockCol].push_back(r);
+            if (r == '.')
             {
-                continue;
+                row[r] = 0;
             }
-            row[c]++;
-            if (row[c] > 1)
+            if (c = '.')
+            {
+                col[c] = 0;
+            }
+            row[r]++;
+            col[c]++;
+            if (row[r] > 1 || col[c] > 1)
             {
                 return false;
             }
         }
         row.clear();
+        col.clear();
     }
 
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < 3; i++)
     {
-        for (int j = 0; j < 9; j++)
+        for (int j = 0; j < 3; j++)
         {
-            char c = board[j][i];
-            if (c == '.')
+            unordered_map<char, int> blockCount;
+            for (char &val : block[i][j])
             {
-                continue;
-            }
-            col[c]++;
-            if (col[c] > 1)
-            {
-                return false;
+                if (val == '.')
+                {
+                    blockCount[val] = 0;
+                }
+                blockCount[val]++;
+                if (blockCount[val] > 1)
+                {
+                    return false;
+                }
             }
         }
-        col.clear();
+        cout << "\n";
     }
     return true;
 }
