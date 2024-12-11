@@ -1,4 +1,4 @@
-uto trip : triplets)
-        {
-            result.push_back(trip);
-        }
+for (int i : rightArray)
+    // {
+    //     cout << i << ' ';
+    // }
