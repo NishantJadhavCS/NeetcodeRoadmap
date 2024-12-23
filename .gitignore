@@ -1,2 +1,14 @@
+# Ignore all files globally with .exe extension
 *.exe
+
+# Ignore the .vscode directory globally
 .vscode/
+
+# Ignore all files in any folder (globally)
+*/*
+
+# Allow files with .c++ extension in any folder
+!*/**/*.c++
+
+# Allow folders to be tracked
+!*/**/
