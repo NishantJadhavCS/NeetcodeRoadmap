@@ -4,6 +4,9 @@
 # Ignore the .vscode directory globally
 .vscode/
 
+#Ignore Temp Code Runner file
+tempCodeRunnerFile.c++
+
 # Ignore all files in any folder (globally)
 */*
 
