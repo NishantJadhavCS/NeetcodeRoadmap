@@ -24,14 +24,19 @@ using namespace std;
 //     return dailyTemp;
 // }
 
+// Stack Method
 vector<int> dailyTemperatures(vector<int> &temperatures)
 {
     stack<int> st;
-    vector<int> dailyTemp;
-    st.push(temperatures[0]);
-    for (int i = 1; i < temperatures.size(); i++)
+    vector<int> dailyTemp(temperatures.size(), 0);
+    for (int i = 0; i < temperatures.size(); i++)
     {
-       
+        while (!st.empty() && temperatures[i] > temperatures[st.top()])
+        {
+            dailyTemp[st.top()] = i - st.top();
+            st.pop();
+        }
+        st.push(i);
     }
     return dailyTemp;
 }
