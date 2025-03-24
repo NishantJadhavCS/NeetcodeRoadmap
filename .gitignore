@@ -5,7 +5,7 @@
 .vscode/
 
 #Ignore Temp Code Runner file
-tempCodeRunnerFile.c++
+**/tempCodeRunnerFile.c++
 
 # Ignore all files in any folder (globally)
 */*
@@ -15,3 +15,5 @@ tempCodeRunnerFile.c++
 
 # Allow folders to be tracked
 !*/**/
+
+tempCodeRunnerFile.c++
