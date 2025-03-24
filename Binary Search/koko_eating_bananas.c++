@@ -2,6 +2,7 @@
 
 using namespace std;
 
+// Binary Search Approach
 int minEatingSpeed(vector<int> &piles, int h)
 {
     int result;
@@ -32,6 +33,7 @@ int minEatingSpeed(vector<int> &piles, int h)
     return result;
 }
 
+// Brute Force Approach
 // int minEatingSpeed(vector<int> &piles, int h)
 // {
 //     int k = 1;
