@@ -8,22 +8,31 @@ int search(vector<int> &nums, int target)
     while (low <= high)
     {
         int mid = low + (high - low) / 2;
-        cout << "Mid " << mid << endl;
-        cout << "Mid Num: " << nums[mid] << endl;
         if (nums[mid] == target)
         {
             return mid;
         }
-        else if (nums[mid] > target || nums[low] > target)
+        else if (nums[low] <= nums[mid])
         {
-            cout << "Left" << endl;
-            low = mid + 1;
+            if (target >= nums[low] && target < nums[mid])
+            {
+                high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
         }
-        else
+        else if (nums[high] >= nums[mid])
         {
-            cout << "Right" << endl;
-            high = mid - 1;
-            cout << "High: " << high << endl;
+            if (target <= nums[high] && target > nums[mid])
+            {
+                low = mid + 1;
+            }
+            else
+            {
+                high = mid - 1;
+            }
         }
     }
     return -1;
@@ -31,8 +40,8 @@ int search(vector<int> &nums, int target)
 
 int main()
 {
-    vector<int> nums = {1, 3};
-    int target = 3;
+    vector<int> nums = {4, 5, 6, 7, 0, 1, 2};
+    int target = 0;
     int result = search(nums, target);
     cout << result << endl;
     return 0;
