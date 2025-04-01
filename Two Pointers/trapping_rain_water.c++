@@ -1,7 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <set>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -66,7 +63,6 @@ int trap(vector<int> &height)
     reverse(rightMax.begin(), rightMax.end());
     for (int i = 1; i < height.size() - 1; i++)
     {
-        int maxRight = 0;
         int minValue = min(rightMax[i], maxLeft);
         if (minValue > height[i])
         {
