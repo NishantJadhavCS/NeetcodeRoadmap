@@ -2,42 +2,72 @@
 
 using namespace std;
 
+// int characterReplacement(string s, int k)
+// {
+//     int maxCount = INT16_MIN;
+//     for (int i = 0; i < s.size(); i++)
+//     {
+//         int count = 1;
+//         int n = k;
+//         int j = i + 1;
+//         cout << "Current element: " << s[i] << " at " << i << endl;
+//         while (j < s.size())
+//         {
+//             cout << "s[i] : " << s[i] << " s[j]: " << s[j] << endl;
+//             cout << " j " << j << endl;
+//             if (s[i] == s[j])
+//             {
+//                 cout << "Same " << endl;
+//                 count++;
+//             }
+//             else
+//             {
+//                 cout << "Not Same " << endl;
+//                 if (n > 0)
+//                 {
+//                     cout << "n -- " << n << endl;
+//                     n--;
+//                     count++;
+//                 }
+//                 else
+//                 {
+//                     break;
+//                 }
+//             }
+//             j++;
+//         }
+//         cout << "Count: " << count << endl;
+//         maxCount = max(maxCount, count);
+//     }
+//     return maxCount;
+// }
+
 int characterReplacement(string s, int k)
 {
-    int maxCount = INT16_MIN;
-    for (int i = 0; i < s.size(); i++)
+    string alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    int n = s.size();
+    int maxCount = 0;
+    for (int i = 0; i < alphabets.size(); i++)
     {
-        int count = 1;
-        int n = k;
-        int j = i + 1;
-        cout << "Current element: " << s[i] << " at " << i << endl;
-        while (j < s.size())
+        int l = 0, r = 0, changes = 0;
+        char target = alphabets[i];
+        while (r < n)
         {
-            cout << "s[i] :" << s[i] << " s[j]: " << s[j] << endl;
-            cout << " j " << j << endl;
-            if (s[i] == s[j])
+            if (s[r] != target)
             {
-                cout << "Same " << endl;
-                count++;
+                changes++;
             }
-            else
+            while (changes > k)
             {
-                cout << "Not Same " << endl;
-                if (n > 0)
+                if (s[l] != target)
                 {
-                    cout << "n -- " << n << endl;
-                    n--;
-                    count++;
+                    changes--;
                 }
-                else
-                {
-                    break;
-                }
+                l++;
             }
-            j++;
+            maxCount = max(maxCount, r - l + 1);
+            r++;
         }
-        cout << "Count: " << count << endl;
-        maxCount = max(maxCount, count);
     }
     return maxCount;
 }
