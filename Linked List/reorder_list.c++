@@ -26,45 +26,31 @@ void printList(ListNode *&head)
 
 void reorderList(ListNode *head)
 {
-    int i = 0;
-    vector<pair<int, ListNode *>> v;
-    ListNode *temp = head;
-    while (temp != nullptr)
+    ListNode *slow = head, *fast = head;
+    while (fast->next && fast->next->next)
     {
-        i++;
-        temp = temp->next;
+        slow = slow->next;
+        fast = fast->next->next;
     }
-    int mid = i / 2;
-    i = 0;
-    temp = head;
-    while (temp != nullptr)
-    {
-        if (i >= mid)
-        {
-            v.push_back({temp->val, temp});
-        }
-        i++;
-        temp = temp->next;
-    }
-    for (int j = 0; j < v.size(); j++)
-    {
-        cout << "First " << v[j].first << " " << v[j].second << endl;
-    }
-    int j = v.size() - 1;
-    temp = head;
-    bool flag = true;
-    ListNode* next_temp; 
-    while (temp != nullptr)
-    {
-        if (flag)
-        {
-            temp->next = v[j].second;
-            flag = false;
-        }
-        else
-        {
+    stack<ListNode *> st;
+    ListNode *temp = slow->next;
+    slow->next = nullptr;
 
-        }
+    while (temp)
+    {
+        st.push(temp);
+        temp = temp->next;
+    }
+
+    temp = head;
+    while (!st.empty())
+    {
+        ListNode *top = st.top();
+        st.pop();
+
+        top->next = temp->next;
+        temp->next = top;
+        temp = top->next;
     }
 }
 
@@ -76,5 +62,6 @@ int main()
     list1->next->next->next = new ListNode(4);
     printList(list1);
     reorderList(list1);
+    printList(list1);
     return 0;
 }
